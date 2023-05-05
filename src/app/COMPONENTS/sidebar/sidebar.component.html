@@ -7,7 +7,7 @@
         <sidebar-item *ngFor="let item of sidebar_items" [item]="item"></sidebar-item>
     </div>
     <div class="aside__footer">
-        <div class="sidebar__item">
+        <div class="sidebar__item" (click)="logout()">
             <i class="fa fa-sign-out"></i>
             <p>Déconnexion</p>
         </div>

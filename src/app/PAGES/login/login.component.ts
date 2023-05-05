@@ -1,5 +1,5 @@
+import { ConnectionService } from './../../SERVICES/connection.service';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -12,7 +12,7 @@ export class LoginComponent {
   public invalid_informations: boolean = false;
   public password_visibility: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private connectionService: ConnectionService) { }
 
   getPasswordType() {
     return this.password_visibility ? 'text' : 'password';
@@ -23,11 +23,6 @@ export class LoginComponent {
   }
 
   login(form: NgForm) {
-    const user = {
-      username: form.value.username,
-      password: form.value.password,
-    };
-    console.log(user);
-    sessionStorage.setItem('JWT_TOKEN', JSON.stringify(user));
+    this.connectionService.login(form.value.username, form.value.password);
   }
 }
