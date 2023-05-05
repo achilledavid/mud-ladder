@@ -1,0 +1,25 @@
+<div class="form">
+    <div class="form__item" [class.form__item--invalid]="invalid_informations">
+        <label for="identifiant">
+            <p>Identifiant :</p>
+        </label>
+        <input type="text" id="identifiant" autocomplete="off" required autofocus>
+    </div>
+    <div class="form__item" [class.form__item--invalid]="invalid_informations">
+        <label for="password">
+            <p>Mot de passe :</p>
+        </label>
+        <div class="form__item__input">
+            <input [type]="getPasswordType()" id="password" autocomplete="off" required>
+            <i class="fa password__eye" [class.fa-eye]="!password_visibility" [class.fa-eye-slash]="password_visibility"
+                (click)="togglePasswordVisibility()"></i>
+        </div>
+        <p class="message">Identifiant ou mot de passe incorrect</p>
+    </div>
+    <div class="form__buttons">
+        <button class="button button--main button--icon">
+            <i class="fa fa-paper-plane"></i>
+            <p>Connexion</p>
+        </button>
+    </div>
+</div>

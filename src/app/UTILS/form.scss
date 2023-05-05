@@ -21,6 +21,10 @@
             }
         }
 
+        input {
+            width: 100%;
+        }
+
         &--invalid {
             input {
                 border-color: var(--red);
@@ -35,6 +39,32 @@
 
                 &.message {
                     display: block;
+                }
+            }
+        }
+
+        &__input {
+            width: 100%;
+
+            &:has(input[type="password"], input[type="text"]) {
+                position: relative;
+
+                input {
+                    padding-right: 35px;
+                }
+
+                .password__eye {
+                    position: absolute;
+                    top: 50%;
+                    right: 5px;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    font-size: 0.85rem;
+                    width: 25px;
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
         }
