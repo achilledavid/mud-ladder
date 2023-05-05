@@ -6,10 +6,12 @@
     line-height: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: #F2F2F2;
     cursor: pointer;
     padding: 5px 8px;
     width: fit-content;
+    text-align: center;
 
     p {
         font-size: 0.85rem;
