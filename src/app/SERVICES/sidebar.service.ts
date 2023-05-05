@@ -29,7 +29,7 @@ export class SidebarService {
 
     constructor(private router: Router) {
         this.router.events.subscribe((event) => {
-            this.closeSidebar();
+            if (this.opened) this.closeSidebar();
         });
     }
 

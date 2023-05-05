@@ -1,7 +1,10 @@
-<sidebar></sidebar>
-<div class="container">
-    <navbar></navbar>
-    <div class="content">
-        <router-outlet></router-outlet>
+<section *ngIf="tokenService.token">
+    <sidebar></sidebar>
+    <div class="container">
+        <navbar></navbar>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-</div>
+</section>
+<login *ngIf="!tokenService.token"></login>

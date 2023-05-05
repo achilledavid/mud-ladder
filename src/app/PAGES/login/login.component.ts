@@ -1,5 +1,6 @@
+import { ConnectionService } from './../../SERVICES/connection.service';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'login',
@@ -11,7 +12,7 @@ export class LoginComponent {
   public invalid_informations: boolean = false;
   public password_visibility: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private connectionService: ConnectionService) { }
 
   getPasswordType() {
     return this.password_visibility ? 'text' : 'password';
@@ -21,7 +22,7 @@ export class LoginComponent {
     this.password_visibility = !this.password_visibility;
   }
 
-  login() {
-    this.router.navigate(['/home']);
+  login(form: NgForm) {
+    this.connectionService.login(form.value.username, form.value.password);
   }
 }
