@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -10,7 +11,7 @@ export class LoginComponent {
   public invalid_informations: boolean = false;
   public password_visibility: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   getPasswordType() {
     return this.password_visibility ? 'text' : 'password';
@@ -18,5 +19,9 @@ export class LoginComponent {
 
   togglePasswordVisibility() {
     this.password_visibility = !this.password_visibility;
+  }
+
+  login() {
+    this.router.navigate(['/home']);
   }
 }
