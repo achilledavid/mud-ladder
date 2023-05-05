@@ -1,11 +1,11 @@
 <div class="form">
-    <div class="form__item">
+    <div class="form__item" [class.form__item--invalid]="invalid_informations">
         <label for="identifiant">
             <p>Identifiant :</p>
         </label>
         <input type="text" id="identifiant" autocomplete="off" required autofocus>
     </div>
-    <div class="form__item form__item--invalid">
+    <div class="form__item" [class.form__item--invalid]="invalid_informations">
         <label for="password">
             <p>Mot de passe :</p>
         </label>
