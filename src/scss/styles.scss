@@ -1,0 +1,17 @@
+:root {
+    --background: #fff;
+    --text: #000;
+    --main: #0171E2;
+    --main-text: #fff;
+}
+
+* {
+    font-family: 'main';
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text);
+}
+
+body {
+    background-color: var(--background);
+}
