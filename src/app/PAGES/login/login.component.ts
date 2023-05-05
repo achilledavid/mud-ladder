@@ -1,6 +1,7 @@
 import { ConnectionService } from './../../SERVICES/connection.service';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { User } from 'src/app/MODELS/user.model';
 
 @Component({
   selector: 'login',
