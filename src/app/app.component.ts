@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SidebarService } from './SERVICES/sidebar.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +8,4 @@ import { SidebarService } from './SERVICES/sidebar.service';
 
 export class AppComponent {
   title = 'MUD';
-
-  constructor(public sidebarService: SidebarService) { }
-
-  public toggleSidebar() {
-    if (this.sidebarService.getSidebarState()) this.sidebarService.closeSidebar();
-    else this.sidebarService.openSidebar();
-  }
 }
