@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { sidebar_item } from 'src/app/SERVICES/sidebar.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class SidebarItemComponent {
   @Input() item!: sidebar_item;
   opened: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   toggleMenu() {
     if (this.item.menu) this.opened = !this.opened;
@@ -18,6 +19,6 @@ export class SidebarItemComponent {
   }
 
   goToLink(link: any) {
-    console.log('go to ' + link)
+    this.router.navigate([link]);
   }
 }
