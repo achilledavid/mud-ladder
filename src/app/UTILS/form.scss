@@ -8,6 +8,11 @@
         flex-direction: column;
         gap: 5px;
 
+        label {
+            width: fit-content;
+            cursor: pointer;
+        }
+
         p {
             font-size: 0.85rem;
             font-weight: 500;
