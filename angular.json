@@ -33,8 +33,10 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/scss/fonts.scss",
               "src/scss/reset.scss",
+              "src/scss/styles.scss",
               "src/app/UTILS/button.scss",
-              "src/scss/styles.scss"
+              "src/app/UTILS/input.scss",
+              "src/app/UTILS/form.scss"
             ],
             "scripts": []
           },
