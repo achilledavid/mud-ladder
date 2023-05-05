@@ -3,6 +3,8 @@
     --text: #000;
     --main: #0171E2;
     --main-text: #fff;
+    --red: hsl(5, 90%, 48%);
+    --red-light: hsl(5, 90%, 90%);
 }
 
 * {
@@ -14,4 +16,10 @@
 
 body {
     background-color: var(--background);
+}
+
+.container {
+    max-width: 1520px;
+    margin: 0 auto;
+    padding: 15px;
 }
