@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { User } from 'src/app/MODELS/user.model';
 
 @Component({
   selector: 'login',

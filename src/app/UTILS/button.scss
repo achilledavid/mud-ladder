@@ -12,6 +12,7 @@
     padding: 5px 8px;
     width: fit-content;
     text-align: center;
+    transition: all 200ms ease;
 
     p {
         font-size: 0.85rem;
@@ -47,5 +48,10 @@
         i {
             color: var(--main-text);
         }
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
     }
 }

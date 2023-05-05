@@ -1,13 +1,13 @@
-<form #form="ngForm" class="form">
+<form #login_form="ngForm" class="form">
     <div class="form__item" [class.form__item--invalid]="invalid_informations">
         <label for="username">
-            <p>Identifiant :</p>
+            <p>Identifiant</p>
         </label>
-        <input type="text" id="username" name="username" autocomplete="off" required autofocus ngModel>
+        <input type="text" id="username" name="username" autocomplete="off" required ngModel>
     </div>
     <div class="form__item" [class.form__item--invalid]="invalid_informations">
         <label for="password">
-            <p>Mot de passe :</p>
+            <p>Mot de passe</p>
         </label>
         <div class="form__item__input">
             <input [type]="getPasswordType()" id="password" name="password" autocomplete="off" required ngModel>
@@ -17,7 +17,8 @@
         <p class="message">Identifiant ou mot de passe incorrect</p>
     </div>
     <div class="form__buttons">
-        <button class="button button--main button--icon" (click)="login(form)">
+        <button class="button button--main button--icon" (click)="login(login_form)" [disabled]="login_form.invalid"
+            title="Afficher le mot de passe">
             <i class="fa fa-paper-plane"></i>
             <p>Connexion</p>
         </button>

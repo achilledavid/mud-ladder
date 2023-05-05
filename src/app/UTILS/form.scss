@@ -70,6 +70,20 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+
+                    &:hover {
+                        filter: opacity(0.6);
+                    }
+                }
+            }
+        }
+
+        &:has(input:required) {
+            p:not(.message) {
+                &::after {
+                    content: "*";
+                    color: var(--red);
+                    margin-left: 3px;
                 }
             }
         }
