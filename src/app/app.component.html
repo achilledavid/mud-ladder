@@ -1,4 +1,4 @@
-<section *ngIf="tokenService.token">
+<section *ngIf="userIsLoggedIn()">
     <sidebar></sidebar>
     <div class="container">
         <navbar></navbar>
@@ -7,4 +7,4 @@
         </div>
     </div>
 </section>
-<login *ngIf="!tokenService.token"></login>
+<login *ngIf="!userIsLoggedIn()"></login>

@@ -12,4 +12,9 @@ export class AppComponent {
   title = 'MUD';
 
   constructor(public tokenService: TokenService) { }
+
+  public userIsLoggedIn(): boolean {
+    if (this.tokenService.token === '' && !sessionStorage.getItem('token')) return false;
+    else return true;
+  }
 }
