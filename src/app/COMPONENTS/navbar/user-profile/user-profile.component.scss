@@ -1,0 +1,23 @@
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background-color: var(--background-color);
+    border-radius: 100vmax;
+    cursor: pointer;
+
+    &:hover {
+        img {
+            filter: brightness(0.8);
+        }
+    }
+
+    img {
+        max-width: 24px;
+        max-height: 24px;
+        object-fit: cover;
+        border-radius: 100vmax;
+        aspect-ratio: 1;
+        transition: 200ms ease;
+    }
+}
