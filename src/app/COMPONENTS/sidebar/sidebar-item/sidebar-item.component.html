@@ -1,0 +1,15 @@
+<div class="sidebar__item" [class.sidebar__item--active]="opened">
+    <div class="sidebar__item__head" (click)="toggleMenu()">
+        <span>
+            <i *ngIf="item.icon" [class]="item.icon"></i>
+            <p *ngIf="item">{{item.title}}</p>
+        </span>
+        <i *ngIf="item.menu" class="fas" [class.fa-chevron-down]="opened" [class.fa-chevron-up]="!opened"></i>
+    </div>
+    <div *ngIf="item.menu" class="sidebar__item__menu">
+        <div class="menu__item" *ngFor="let menu of item.menu" (click)="goToLink(menu.link)">
+            <i *ngIf="menu.icon" [class]="menu.icon"></i>
+            <p>{{menu.title}}</p>
+        </div>
+    </div>
+</div>

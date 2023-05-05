@@ -1,0 +1,15 @@
+<aside class="aside" [class.aside--open]="sidebarService.getSidebarState()">
+    <div class="aside__head">
+        <p>mud</p>
+        <i class="fa fa-xmark" (click)="toggleSidebar()"></i>
+    </div>
+    <div class="aside__content">
+        <sidebar-item *ngFor="let item of sidebar_items" [item]="item"></sidebar-item>
+    </div>
+    <div class="aside__footer">
+        <div class="sidebar__item">
+            <i class="fa fa-sign-out"></i>
+            <p>Déconnexion</p>
+        </div>
+    </div>
+</aside>
