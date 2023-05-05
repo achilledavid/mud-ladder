@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { User } from 'src/app/MODELS/user.model';
 
 @Component({
   selector: 'login',
@@ -23,6 +24,11 @@ export class LoginComponent {
   }
 
   login(form: NgForm) {
-    console.log(form.value);
+    const user = {
+      username: form.value.username,
+      password: form.value.password,
+    };
+    console.log(user);
+    sessionStorage.setItem('JWT_TOKEN', JSON.stringify(user));
   }
 }
