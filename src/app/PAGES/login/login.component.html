@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div class="form">
+    <div class="form__item">
+        <label for="identifiant">
+            <p>Identifiant :</p>
+        </label>
+        <input type="text" id="identifiant" autocomplete="off" required autofocus>
+    </div>
+    <div class="form__item form__item--invalid">
+        <label for="password">
+            <p>Mot de passe :</p>
+        </label>
+        <input type="password" id="password" autocomplete="off" required>
+        <p class="message">Identifiant ou mot de passe incorrect</p>
+    </div>
+    <div class="form__buttons">
+        <button class="button button--main button--icon">
+            <i class="fa fa-paper-plane"></i>
+            <p>Connexion</p>
+        </button>
+    </div>
+</div>
