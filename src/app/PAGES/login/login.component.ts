@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'login',
@@ -21,7 +22,7 @@ export class LoginComponent {
     this.password_visibility = !this.password_visibility;
   }
 
-  login() {
-    this.router.navigate(['/home']);
+  login(form: NgForm) {
+    console.log(form.value);
   }
 }

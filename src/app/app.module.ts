@@ -8,6 +8,7 @@ import { SidebarItemComponent } from './COMPONENTS/sidebar/sidebar-item/sidebar-
 import { LoginComponent } from './PAGES/login/login.component';
 import { NavbarComponent } from './COMPONENTS/navbar/navbar.component';
 import { HomeComponent } from './PAGES/home/home.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './PAGES/home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
