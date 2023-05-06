@@ -14,9 +14,11 @@ export class ConnectionService {
             password: password,
         };
         this.tokenService.token = JSON.stringify(user);
+        sessionStorage.setItem('token', this.tokenService.token);
     }
 
     public logout() {
         this.tokenService.token = '';
+        sessionStorage.removeItem('token');
     }
 }
