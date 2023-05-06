@@ -24,9 +24,10 @@ import { UserProfileComponent } from './COMPONENTS/navbar/user-profile/user-prof
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

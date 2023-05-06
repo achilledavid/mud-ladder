@@ -22,7 +22,8 @@
         font-size: 0.8rem;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
         filter: brightness(0.95);
     }
 
