@@ -1,6 +1,6 @@
 <div class="login">
     <div class="login__image">
-        <img src="assets/img/login_page_image.jpg" alt="Logo">
+        <img src="assets/img/login_page_image.jpg" alt="Image d'accueil" draggable="false">
     </div>
     <form #login_form="ngForm" class="form">
         <div class="form__title">
@@ -24,11 +24,19 @@
             <p class="message">Identifiant ou mot de passe incorrect</p>
         </div>
         <div class="form__buttons">
-            <button class="button button--main button--icon" (click)="login(login_form)" [disabled]="login_form.invalid"
+            <button class="button button--main" (click)="login(login_form)" [disabled]="login_form.invalid"
                 title="Afficher le mot de passe">
-                <i class="fa fa-paper-plane"></i>
                 <p>Connexion</p>
             </button>
+        </div>
+        <div class="form__buttons" (click)="forgotPassword()">
+            <span class="button">
+                <p>Mot de passe oublié ?</p>
+            </span>
+            <span class="button button--icon" (click)="signup()">
+                <i class="fa fa-user-plus"></i>
+                <p>S'inscrire</p>
+            </span>
         </div>
     </form>
 </div>
