@@ -79,7 +79,7 @@ export class SignUpComponent {
   }
 
   verifyUsername(username: string) {
-    if (username === '' || username === undefined || username === null || username.length < 3 || username.length > 20) {
+    if (username === '' || username === undefined || username === null || username.length < 3 || username.length > 20 || !username.match(/^[a-zA-Z0-9]+$/)) {
       this.invalid_username = true;
       return false;
     } else {

@@ -43,8 +43,8 @@
                         [class.fa-eye-slash]="password_visibility" (click)="togglePasswordVisibility()"
                         title="show my password"></i>
                 </div>
-                <p class="message" *ngIf="weak_password">must be at least 8 characters with lowercase, uppercase and
-                    digit</p>
+                <p class="message" *ngIf="weak_password">must be at least 8 characters with lowercase, uppercase, digit
+                    and special character</p>
             </div>
             <div class="form__item" [class.form__item--invalid]="passwords_dont_match || invalid_informations">
                 <label for="password_confirmation">
@@ -64,12 +64,12 @@
             <p class="message" *ngIf="existing_email">e-mail already used</p>
         </div>
         <div class="form__buttons">
-            <span class="button button--icon" (click)="goBack()">
+            <span class="button button--icon" (click)="goBack()" title="go back to login page">
                 <i class="fa fa-arrow-left"></i>
                 <p>back</p>
             </span>
             <button class="button button--main" (click)="signup(signup_form)" [disabled]="signup_form.invalid"
-                title="connect to our website">
+                title="create your account">
                 <p>sign up</p>
             </button>
         </div>
