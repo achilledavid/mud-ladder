@@ -3,10 +3,10 @@ export interface User {
     username: string;
     password: string;
     email: string;
-    first_name?: string;
-    last_name?: string;
-    profile_picture: string;
+    first_name: string;
+    last_name: string;
+    picture_id: string;
     created_at: Date;
-    updated_at?: Date;
+    updated_at: Date;
     favorite_characters?: Array<string>;
 }

@@ -33,7 +33,16 @@ export class LoginComponent {
 
   login(form: NgForm) {
     if (!this.verifyInformations(form.value.username, form.value.password)) return;
-    else this.connectionService.login(form.value.username, form.value.password);
+    else {
+      this.connectionService.login(form.value.username, form.value.password)
+        .subscribe(
+          (response) => {
+            this.invalid_informations = false;
+          },
+          (error) => {
+            this.invalid_informations = true;
+          });
+    }
   }
 
   signup() {
