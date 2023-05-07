@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ConnectionService } from 'src/app/SERVICES/connection.service';
 import { TokenService } from 'src/app/SERVICES/token.service';
 import { NgForm } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,15 +14,16 @@ export class SignUpComponent {
   public invalid_informations: boolean = false;
   public invalid_first_name: boolean = false;
   public invalid_last_name: boolean = false;
+  public invalid_username: boolean = false;
+  public existing_username: boolean = false;
   public weak_password: boolean = false;
   public passwords_dont_match: boolean = false;
   public invalid_email: boolean = false;
-  public invalid_username: boolean = false;
-  public existing_username: boolean = false;
+  public existing_email: boolean = false;
   public password_visibility: boolean = false;
   public password_type: string = 'password';
 
-  constructor(private connectionService: ConnectionService, private router: Router, private tokenService: TokenService) {
+  constructor(private connectionService: ConnectionService, private router: Router, private tokenService: TokenService, private location: Location) {
     if (this.tokenService.isLoggedIn()) this.router.navigate(['/home']);
   }
 
@@ -50,6 +52,7 @@ export class SignUpComponent {
     if (!this.verifyFirstName(first_name)) return false;
     else if (!this.verifyLastName(last_name)) return false;
     else if (!this.verifyUsername(username)) return false;
+    else if (!this.verifyPasswordStrenght(password)) return false;
     else if (!this.verifyPasswords(password, password_confirmation)) return false;
     else if (!this.verifyEmail(email)) return false;
     else return true;
@@ -85,6 +88,16 @@ export class SignUpComponent {
     }
   }
 
+  verifyPasswordStrenght(password: string) {
+    if (password === '' || password === undefined || password === null || password.length < 8 || password.length > 32 || !password.match(/[a-z]/g) || !password.match(/[A-Z]/g) || !password.match(/[0-9]/g) || !password.match(/[^a-zA-Z\d]/g)) {
+      this.weak_password = true;
+      return false;
+    } else {
+      this.weak_password = false;
+      return true;
+    }
+  }
+
   verifyPasswords(password: string, password_confirmation: string) {
     if (password !== password_confirmation) {
       this.passwords_dont_match = true;
@@ -103,5 +116,9 @@ export class SignUpComponent {
       this.invalid_email = false;
       return true;
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
