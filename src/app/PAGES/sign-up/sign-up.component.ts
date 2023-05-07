@@ -88,7 +88,8 @@ export class SignUpComponent {
   }
 
   verifyPasswordStrenght(password: string) {
-    if (password === '' || password === undefined || password === null || password.length < 8 || password.length > 32 || !password.match(/[a-z]/g) || !password.match(/[A-Z]/g) || !password.match(/[0-9]/g) || !password.match(/[^a-zA-Z\d]/g)) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[^\s]{8,}$/;
+    if (!password.match(regex)) {
       this.weak_password = true;
       return false;
     } else {
@@ -108,7 +109,8 @@ export class SignUpComponent {
   }
 
   verifyEmail(email: string) {
-    if (email === '' || email === undefined || email === null || email.length < 5 || email.length > 255 || !email.includes('@') || !email.includes('.')) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.match(regex)) {
       this.invalid_email = true;
       return false;
     } else {
