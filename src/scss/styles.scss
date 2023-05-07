@@ -1,10 +1,10 @@
 :root {
-    --background: hsl(43, 50%, 99%);
-    --background-hover: hsl(43, 50%, 95%);
-    --text: #2C2F33;
-    --main: hsl(203, 77%, 45%);
-    --main-light: hsl(203, 77%, 87%);
-    --main-text: hsl(203, 77%, 97%);
+    --background: #1D1D1C;
+    --background-hover: rgb(0, 0, 0, 0.25);
+    --text: #E1E5EA;
+    --main: rgb(26, 135, 203);
+    --main-light: rgb(26, 135, 203, 0.4);
+    --main-text: #E1E5EA;
     --red: #E94F37;
     --red-light: rgb(233, 79, 55, 0.4);
     --green: #329F5B;
@@ -26,4 +26,13 @@ body {
     max-width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
+}
+
+.container {
+    .content_wrapper {
+        max-width: 1520px;
+        margin: 0 auto;
+        padding: 15px;
+        padding-top: 0;
+    }
 }

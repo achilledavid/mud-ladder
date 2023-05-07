@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConnectionService } from 'src/app/SERVICES/connection.service';
 import { TokenService } from 'src/app/SERVICES/token.service';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -23,7 +22,7 @@ export class SignUpComponent {
   public password_visibility: boolean = false;
   public password_type: string = 'password';
 
-  constructor(private connectionService: ConnectionService, private router: Router, private tokenService: TokenService, private location: Location) {
+  constructor(private router: Router, private tokenService: TokenService, private location: Location) {
     if (this.tokenService.isLoggedIn()) this.router.navigate(['/home']);
   }
 
@@ -89,7 +88,8 @@ export class SignUpComponent {
   }
 
   verifyPasswordStrenght(password: string) {
-    if (password === '' || password === undefined || password === null || password.length < 8 || password.length > 32 || !password.match(/[a-z]/g) || !password.match(/[A-Z]/g) || !password.match(/[0-9]/g) || !password.match(/[^a-zA-Z\d]/g)) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[^\s]{8,}$/;
+    if (!password.match(regex)) {
       this.weak_password = true;
       return false;
     } else {
@@ -109,7 +109,8 @@ export class SignUpComponent {
   }
 
   verifyEmail(email: string) {
-    if (email === '' || email === undefined || email === null || email.length < 5 || email.length > 255 || !email.includes('@') || !email.includes('.')) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.match(regex)) {
       this.invalid_email = true;
       return false;
     } else {

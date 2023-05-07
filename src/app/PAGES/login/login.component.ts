@@ -3,6 +3,7 @@ import { ConnectionService } from '../../SERVICES/connection.service';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TokenService } from 'src/app/SERVICES/token.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'login',
@@ -17,7 +18,7 @@ export class LoginComponent {
   public password_visibility: boolean = false;
   public password_type: string = 'password';
 
-  constructor(private connectionService: ConnectionService, private router: Router, private tokenService: TokenService) {
+  constructor(private connectionService: ConnectionService, private router: Router, private tokenService: TokenService, private location: Location) {
     if (this.tokenService.isLoggedIn()) this.router.navigate(['/home']);
   }
 
@@ -76,5 +77,9 @@ export class LoginComponent {
       this.invalid_password = false;
       return true;
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

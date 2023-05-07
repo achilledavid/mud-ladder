@@ -35,6 +35,6 @@ export class ConnectionService {
 
     public logout() {
         this.tokenService.deleteToken();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/about-us']);
     }
 }

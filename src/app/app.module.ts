@@ -11,6 +11,7 @@ import { HomeComponent } from './PAGES/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { UserProfileComponent } from './COMPONENTS/navbar/user-profile/user-profile.component';
 import { SignUpComponent } from './PAGES/sign-up/sign-up.component';
+import { AboutUsComponent } from './PAGES/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SignUpComponent } from './PAGES/sign-up/sign-up.component';
     NavbarComponent,
     HomeComponent,
     UserProfileComponent,
-    SignUpComponent
+    SignUpComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
