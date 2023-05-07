@@ -65,12 +65,8 @@
                 font-size: 0.85rem;
             }
 
-            p {
-                font-weight: 500;
-            }
-
             &:hover {
-                filter: brightness(0.95);
+                background-color: var(--background-hover);
             }
         }
     }

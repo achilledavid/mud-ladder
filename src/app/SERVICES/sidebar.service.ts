@@ -16,20 +16,20 @@ export class SidebarService {
     opened: boolean = false;
 
     private items: Array<sidebar_item> = [
-        { title: 'Accueil', link: '/home', icon: 'fa fa-home' },
+        { title: 'home', link: '/home', icon: 'fa fa-home' },
         {
-            title: 'Matchs', icon: 'fa fa-gamepad', menu: [
-                { title: 'Trouver un match', link: '/matchs/find' },
-                { title: 'Matchs en cours', link: '/matchs/ongoing' },
+            title: 'matchs', icon: 'fa fa-gamepad', menu: [
+                { title: 'find', link: '/matchs/find' },
+                { title: 'ongoing', link: '/matchs/ongoing' },
             ]
         },
-        { title: 'Historique', link: '/history', icon: 'fa fa-history' },
-        { title: 'Mon compte', link: '/account', icon: 'fa fa-user' }
+        { title: 'history', link: '/history', icon: 'fa fa-history' }
     ];
 
     constructor(private router: Router) {
         this.router.events.subscribe((event) => {
             if (this.opened) this.closeSidebar();
+            console.log('router')
         });
     }
 
@@ -39,10 +39,12 @@ export class SidebarService {
 
     public openSidebar() {
         this.opened = true;
+        console.log('open')
     }
 
     public closeSidebar() {
         this.opened = false;
+        console.log('close')
     }
 
     public getSidebarState(): boolean {

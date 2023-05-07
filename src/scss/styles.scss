@@ -1,17 +1,20 @@
 :root {
-    --background: #fff;
-    --text: #000;
-    --main: #0171E2;
-    --main-light: #cce6ff;
-    --main-text: #fff;
-    --red: #dc2918;
-    --red-light: #fcd2cf;
+    --background: hsl(43, 50%, 99%);
+    --background-hover: hsl(43, 50%, 95%);
+    --text: #2C2F33;
+    --main: hsl(203, 77%, 45%);
+    --main-light: hsl(203, 77%, 87%);
+    --main-text: hsl(203, 77%, 97%);
+    --red: #E94F37;
+    --red-light: rgb(233, 79, 55, 0.4);
+    --green: #329F5B;
+    --green-light: rgb(50, 159, 91, 0.4);
 }
 
 * {
     font-family: 'main';
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text);
 }
 

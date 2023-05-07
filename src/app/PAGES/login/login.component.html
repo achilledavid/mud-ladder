@@ -8,34 +8,35 @@
         </div>
         <div class="form__item" [class.form__item--invalid]="invalid_informations">
             <label for="username">
-                <p>Identifiant</p>
+                <p>username</p>
             </label>
             <input type="text" id="username" name="username" autocomplete="off" required ngModel>
         </div>
         <div class="form__item" [class.form__item--invalid]="invalid_informations">
             <label for="password">
-                <p>Mot de passe</p>
+                <p>password</p>
             </label>
             <div class="form__item__input">
                 <input [type]="getPasswordType()" id="password" name="password" autocomplete="off" required ngModel>
                 <i class="fa password__eye" [class.fa-eye]="!password_visibility"
-                    [class.fa-eye-slash]="password_visibility" (click)="togglePasswordVisibility()"></i>
+                    [class.fa-eye-slash]="password_visibility" (click)="togglePasswordVisibility()"
+                    title="show my password"></i>
             </div>
-            <p class="message">Identifiant ou mot de passe incorrect</p>
+            <p class="message">incorrect username or password</p>
         </div>
         <div class="form__buttons">
             <button class="button button--main" (click)="login(login_form)" [disabled]="login_form.invalid"
-                title="Afficher le mot de passe">
-                <p>Connexion</p>
+                title="connect to our website">
+                <p>connect</p>
             </button>
         </div>
-        <div class="form__buttons" (click)="forgotPassword()">
+        <div class="form__buttons" (click)="forgotPassword()" title="did you forget your password ?">
             <span class="button">
-                <p>Mot de passe oublié ?</p>
+                <p>forgot password ?</p>
             </span>
-            <span class="button button--icon" (click)="signup()">
+            <span class="button button--icon" (click)="signup()" title="sign up to the website">
                 <i class="fa fa-user-plus"></i>
-                <p>S'inscrire</p>
+                <p>sign up</p>
             </span>
         </div>
     </form>
