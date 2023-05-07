@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { TokenService } from './SERVICES/token.service';
 import { Component } from '@angular/core';
 
@@ -10,7 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'MUD';
 
-  constructor(public tokenService: TokenService, private router: Router) { }
+  constructor(public tokenService: TokenService) { }
 
   public userIsLoggedIn(): boolean {
     if (this.tokenService.token === '' && !sessionStorage.getItem('token')) return false;
