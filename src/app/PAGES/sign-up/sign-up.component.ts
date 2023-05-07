@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { TokenService } from 'src/app/SERVICES/token.service';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
+import { User } from 'src/app/MODELS/user.model';
+import { ConnectionService } from 'src/app/SERVICES/connection.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,8 +23,9 @@ export class SignUpComponent {
   public existing_email: boolean = false;
   public password_visibility: boolean = false;
   public password_type: string = 'password';
+  public error_message: string = '';
 
-  constructor(private router: Router, private tokenService: TokenService, private location: Location) {
+  constructor(private router: Router, private tokenService: TokenService, private location: Location, private connectionService: ConnectionService) {
     if (this.tokenService.isLoggedIn()) this.router.navigate(['/home']);
   }
 
@@ -36,15 +39,40 @@ export class SignUpComponent {
   }
 
   signup(form: NgForm) {
-    const user = {
+    const user: User = {
       first_name: form.value.first_name,
       last_name: form.value.last_name,
       username: form.value.username,
       email: form.value.email,
       password: form.value.password,
-      password_confirmation: form.value.password_confirmation
+      picture_id: '',
     };
-    if (!this.verifyInformations(user.first_name, user.last_name, user.username, user.email, user.password, user.password_confirmation)) return;
+    if (!this.verifyInformations(user.first_name, user.last_name, user.username, user.email, user.password, form.value.password_confirmation)) {
+      return;
+    } else {
+      this.connectionService.signup(user).subscribe((response: any) => {
+        if (response !== 'success') response.then((value: any) => {
+          this.error_message = value;
+          if (this.error_message === 'username') {
+            this.existing_username = true;
+            this.existing_email = false;
+            this.invalid_informations = false;
+          } else if (this.error_message === 'email') {
+            this.existing_username = false;
+            this.existing_email = true;
+            this.invalid_informations = false;
+          } else {
+            this.existing_username = false;
+            this.existing_email = false;
+            this.invalid_informations = true;
+          }
+        }); else {
+          this.existing_username = false;
+          this.existing_email = false;
+          this.invalid_informations = false;
+        }
+      });
+    }
   }
 
   verifyInformations(first_name: string, last_name: string, username: string, email: string, password: string, password_confirmation: string) {

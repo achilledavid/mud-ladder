@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -9,13 +10,20 @@ export class BackendService {
 
     constructor() { }
 
-    postWithParams(url: string, params: any) {
-        return fetch(this.base_url + url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(params)
+    postWithParams(url: string, params: any): Observable<Response> {
+        return new Observable((observer: Observer<Response>) => {
+            fetch(this.base_url + url, {
+                method: 'POST',
+                body: JSON.stringify(params),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((response: Response) => {
+                observer.next(response);
+                observer.complete();
+            }).catch((error: Error) => {
+                observer.error(error);
+            });
         });
     }
 }

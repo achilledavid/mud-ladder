@@ -33,16 +33,15 @@ export class LoginComponent {
 
   login(form: NgForm) {
     if (!this.verifyInformations(form.value.username, form.value.password)) return;
-    else {
-      this.connectionService.login(form.value.username, form.value.password)
-        .subscribe(
-          (response) => {
-            this.invalid_informations = false;
-          },
-          (error) => {
-            this.invalid_informations = true;
-          });
-    }
+    this.connectionService.login(form.value.username, form.value.password).subscribe(
+      (token: string) => {
+        this.router.navigate(['/home']);
+        this.invalid_informations = false;
+      },
+      (error: any) => {
+        this.invalid_informations = true;
+      }
+    );
   }
 
   signup() {
@@ -55,7 +54,6 @@ export class LoginComponent {
 
   verifyInformations(username: string, password: string) {
     if (!this.verifyUsername(username)) return false;
-    else if (!this.verifyPassword(password)) return false;
     else return true;
   }
 
@@ -65,16 +63,6 @@ export class LoginComponent {
       return false;
     } else {
       this.invalid_username = false;
-      return true;
-    }
-  }
-
-  verifyPassword(password: string) {
-    if (password.length < 8 || password.length > 32) {
-      this.invalid_password = true;
-      return false;
-    } else {
-      this.invalid_password = false;
       return true;
     }
   }
