@@ -13,7 +13,7 @@
             <input type="text" id="username" name="username" autocomplete="off" required ngModel>
             <p class="message" *ngIf="invalid_username">invalid username, must be 3-20 characters</p>
         </div>
-        <div class="form__item" [class.form__item--invalid]="invalid_password || invalid_informations">
+        <div class="form__item" [class.form__item--invalid]="invalid_informations">
             <label for="password">
                 <p>password</p>
             </label>
@@ -24,7 +24,6 @@
                     title="show my password"></i>
             </div>
             <p class="message" *ngIf="invalid_informations">incorrect username or password</p>
-            <p class="message" *ngIf="invalid_password">invalid password, must be at least 8 characters</p>
         </div>
         <div class="form__buttons">
             <button class="button button--main" (click)="login(login_form)" [disabled]="login_form.invalid"
