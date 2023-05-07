@@ -1,4 +1,4 @@
-<section *ngIf="userIsLoggedIn()">
+<section *ngIf="isLoggedIn()">
     <sidebar></sidebar>
     <div class="container">
         <navbar></navbar>
@@ -7,4 +7,6 @@
         </div>
     </div>
 </section>
-<login *ngIf="!userIsLoggedIn()"></login>
+<section *ngIf="!isLoggedIn()">
+    <router-outlet></router-outlet>
+</section>

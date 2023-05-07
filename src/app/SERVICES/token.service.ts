@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -7,5 +8,25 @@ import { Injectable } from '@angular/core';
 export class TokenService {
     public token: string = '';
 
-    constructor() { }
+    constructor(private router: Router) { }
+
+    public setToken(token: string): void {
+        this.token = token;
+        sessionStorage.setItem('authToken', token);
+    }
+
+    public deleteToken(): void {
+        this.token = '';
+        sessionStorage.removeItem('authToken');
+    }
+
+    public isLoggedIn(): boolean {
+        return sessionStorage.getItem('authToken') !== null;
+    }
+
+    public redirectToLoginIfNotLoggedIn(): void {
+        if (!this.isLoggedIn()) {
+            this.router.navigate(['/login']);
+        }
+    }
 }

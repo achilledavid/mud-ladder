@@ -29,7 +29,6 @@ export class SidebarService {
     constructor(private router: Router) {
         this.router.events.subscribe((event) => {
             if (this.opened) this.closeSidebar();
-            console.log('router')
         });
     }
 
@@ -39,12 +38,10 @@ export class SidebarService {
 
     public openSidebar() {
         this.opened = true;
-        console.log('open')
     }
 
     public closeSidebar() {
         this.opened = false;
-        console.log('close')
     }
 
     public getSidebarState(): boolean {
