@@ -10,6 +10,7 @@ import { NavbarComponent } from './COMPONENTS/navbar/navbar.component';
 import { HomeComponent } from './PAGES/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { UserProfileComponent } from './COMPONENTS/navbar/user-profile/user-profile.component';
+import { SignUpComponent } from './PAGES/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserProfileComponent } from './COMPONENTS/navbar/user-profile/user-prof
     LoginComponent,
     NavbarComponent,
     HomeComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
