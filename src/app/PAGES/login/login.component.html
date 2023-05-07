@@ -17,7 +17,7 @@
                 <p>password</p>
             </label>
             <div class="form__item__input">
-                <input [type]="getPasswordType()" id="password" name="password" autocomplete="off" required ngModel>
+                <input [type]="password_type" id="password" name="password" autocomplete="off" required ngModel>
                 <i class="fa password__eye" [class.fa-eye]="!password_visibility"
                     [class.fa-eye-slash]="password_visibility" (click)="togglePasswordVisibility()"
                     title="show my password"></i>

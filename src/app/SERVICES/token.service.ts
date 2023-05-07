@@ -25,8 +25,8 @@ export class TokenService {
     }
 
     public redirectToLoginIfNotLoggedIn(): void {
-        if (!this.isLoggedIn()) {
+        if (this.router.url !== '/login' && this.router.url !== '/sign-up' && !this.isLoggedIn()) {
             this.router.navigate(['/login']);
-        }
+        };
     }
 }
