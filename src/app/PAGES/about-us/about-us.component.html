@@ -1,0 +1,11 @@
+<div class="container" *ngIf="!isLoggedIn()">
+    <nav>
+        <p class="logo">mud</p>
+        <button class="button button--main" (click)="goToSignIn()" title="sign in to mud">
+            <p>sign in</p>
+        </button>
+    </nav>
+    <div class="content_wrapper content">
+        <h2>Welcome to the mud ladder !</h2>
+    </div>
+</div>

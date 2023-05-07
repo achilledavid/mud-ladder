@@ -27,3 +27,12 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
 }
+
+.container {
+    .content_wrapper {
+        max-width: 1520px;
+        margin: 0 auto;
+        padding: 15px;
+        padding-top: 0;
+    }
+}

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConnectionService } from 'src/app/SERVICES/connection.service';
 import { TokenService } from 'src/app/SERVICES/token.service';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -23,7 +22,7 @@ export class SignUpComponent {
   public password_visibility: boolean = false;
   public password_type: string = 'password';
 
-  constructor(private connectionService: ConnectionService, private router: Router, private tokenService: TokenService, private location: Location) {
+  constructor(private router: Router, private tokenService: TokenService, private location: Location) {
     if (this.tokenService.isLoggedIn()) this.router.navigate(['/home']);
   }
 

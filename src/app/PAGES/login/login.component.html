@@ -28,15 +28,16 @@
         </div>
         <div class="form__buttons">
             <button class="button button--main" (click)="login(login_form)" [disabled]="login_form.invalid"
-                title="connect to our website">
-                <p>connect</p>
+                title="sign in to mud">
+                <p>sign in</p>
             </button>
         </div>
-        <div class="form__buttons" (click)="forgotPassword()" title="did you forget your password ?">
-            <span class="button">
-                <p>forgot your password ?</p>
+        <div class="form__buttons">
+            <span class="button button--icon" (click)="goBack()" title="go back to previous page">
+                <i class="fa fa-arrow-left"></i>
+                <p>back</p>
             </span>
-            <span class="button button--icon" (click)="signup()" title="no account ? sign up to our website">
+            <span class="button button--icon" (click)="signup()" title="no account ? sign up to mud">
                 <i class="fa fa-user-plus"></i>
                 <p>sign up</p>
             </span>
