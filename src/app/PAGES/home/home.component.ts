@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenService } from 'src/app/SERVICES/token.service';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  public decodedToken: any = {};
 
+  constructor(private tokenService: TokenService) {
+    this.decodedToken = this.tokenService.decodeToken();
+  }
 }

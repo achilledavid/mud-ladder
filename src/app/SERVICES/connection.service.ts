@@ -20,6 +20,7 @@ export class ConnectionService {
                         response.json().then((json: any) => {
                             const token: string = json.jwt;
                             this.tokenService.setToken(token);
+                            this.router.navigate(['/home']);
                         });
                         return 'success';
                     } else {
