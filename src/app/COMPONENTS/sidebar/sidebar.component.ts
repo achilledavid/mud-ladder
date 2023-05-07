@@ -21,6 +21,7 @@ export class SidebarComponent {
   }
 
   logout() {
+    this.sidebarService.closeSidebar();
     this.connectionService.logout();
   }
 }
