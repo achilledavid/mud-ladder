@@ -17,9 +17,11 @@ export class ConnectionService {
             .pipe(
                 map((response: any) => {
                     if (response.status == 200) {
-                        const token = response.jwt;
-                        this.tokenService.setToken(token);
-                        return token;
+                        response.json().then((json: any) => {
+                            const token: string = json.jwt;
+                            this.tokenService.setToken(token);
+                        });
+                        return 'success';
                     } else {
                         throw new Error('Invalid response status');
                     }
@@ -47,6 +49,7 @@ export class ConnectionService {
                 } else {
                     return response.json().then((json: any) => {
                         const error: string = json.message;
+                        console.log(error);
                         if (error.includes('username')) return 'username';
                         else if (error.includes('email')) return 'email';
                         else throw new Error('Invalid response status');
