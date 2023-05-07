@@ -3,7 +3,9 @@
     border-radius: 100vmax;
     position: relative;
 
-    img {
+    img,
+    object {
+        background-color: var(--background);
         max-width: 24px;
         max-height: 24px;
         object-fit: cover;
