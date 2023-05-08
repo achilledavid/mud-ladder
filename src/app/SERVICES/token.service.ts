@@ -26,7 +26,7 @@ export class TokenService {
 
     public decodeToken(): any {
         const token: string = this.getToken();
-        if (token === '') return {};
+        if (token === '' || !token) return {};
         else return JSON.parse(atob(token.split('.')[1]));
     }
 

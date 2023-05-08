@@ -24,3 +24,23 @@
         }
     }
 }
+
+@media screen and (max-width: 780px) {
+    .login {
+        &__image {
+            display: none;
+        }
+
+        form {
+            padding: 0 40px;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .login {
+        form {
+            padding: 0 20px;
+        }
+    }
+}

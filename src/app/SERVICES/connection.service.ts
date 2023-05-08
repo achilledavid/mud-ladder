@@ -42,15 +42,11 @@ export class ConnectionService {
         }).pipe(
             map((response: any) => {
                 if (response.status === 201) {
-                    this.login(user.username, user.password).subscribe((token: string) => {
-                        this.tokenService.setToken(token);
-                        this.router.navigate(['/home']);
-                    });
+                    this.router.navigate(['/login']);
                     return 'success';
                 } else {
                     return response.json().then((json: any) => {
                         const error: string = json.message;
-                        console.log(error);
                         if (error.includes('username')) return 'username';
                         else if (error.includes('email')) return 'email';
                         else throw new Error('Invalid response status');

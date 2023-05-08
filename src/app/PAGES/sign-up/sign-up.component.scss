@@ -24,3 +24,31 @@
         }
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .sign-up {
+        &__image {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .sign-up {
+        form {
+            padding: 0 40px;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .sign-up {
+        form {
+            padding: 0 20px;
+
+            .form__lign {
+                flex-direction: column;
+            }
+        }
+    }
+}
