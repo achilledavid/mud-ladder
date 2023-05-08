@@ -2,7 +2,7 @@
     <div class="sign-up__image">
         <img src="assets/img/login_page_image.webp" alt="Smash bros tournament picture" draggable="false">
     </div>
-    <form #signup_form="ngForm" class="form">
+    <form #signup_form="ngForm" class="form" [class.form--loading]="loading">
         <div class="form__title">
             <h1>welcome to mud !</h1>
         </div>
@@ -69,8 +69,8 @@
                 <p>back</p>
             </span>
             <button class="button button--main" (click)="signup(signup_form)" [disabled]="signup_form.invalid"
-                title="sign up to mud">
-                <p>sign up</p>
+                title="create your account to mud">
+                <p>create your account</p>
             </button>
         </div>
     </form>

@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TokenService } from 'src/app/SERVICES/token.service';
 import { Location } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'login',
@@ -17,6 +18,7 @@ export class LoginComponent {
   public invalid_password: boolean = false;
   public password_visibility: boolean = false;
   public password_type: string = 'password';
+  public loading: boolean = false;
 
   constructor(private connectionService: ConnectionService, private router: Router, private tokenService: TokenService, private location: Location) {
     if (this.tokenService.isLoggedIn()) this.router.navigate(['/home']);
@@ -32,16 +34,51 @@ export class LoginComponent {
   }
 
   login(form: NgForm) {
+    this.loading = true;
     if (!this.verifyInformations(form.value.username, form.value.password)) return;
     this.connectionService.login(form.value.username, form.value.password).subscribe(
       (token: string) => {
-        this.router.navigate(['/home']);
-        this.invalid_informations = false;
+        this.successfulLogin(form.value.username);
       },
       (error: any) => {
-        this.invalid_informations = true;
+        this.loading = false;
+        error.message === 'Invalid username or password' ? this.invalid_informations = true : this.invalid_informations = false;
+        if (error.message != 'Invalid username or password') this.errorWhileLoggingModal();
       }
     );
+  }
+
+  successfulLogin(name: string) {
+    this.loading = false;
+    this.successfulLoginModal(name);
+    this.router.navigate(['/home']);
+    this.invalid_informations = false;
+  }
+
+  successfulLoginModal(name: string) {
+    Swal.fire({
+      title: 'Welcome back, ' + name + ' !',
+      text: 'You are now logged in !',
+      icon: 'success',
+      confirmButtonText: 'Continue',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'button button--main button--big'
+      }
+    });
+  }
+
+  errorWhileLoggingModal() {
+    Swal.fire({
+      title: 'Oops...',
+      text: 'Something went wrong while logging in !',
+      icon: 'error',
+      confirmButtonText: 'Try again',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'button button--main button--big',
+      }
+    });
   }
 
   signup() {

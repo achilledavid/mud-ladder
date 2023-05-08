@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
 import { User } from 'src/app/MODELS/user.model';
 import { ConnectionService } from 'src/app/SERVICES/connection.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',
@@ -24,6 +25,7 @@ export class SignUpComponent {
   public password_visibility: boolean = false;
   public password_type: string = 'password';
   public error_message: string = '';
+  public loading: boolean = false;
 
   constructor(private router: Router, private tokenService: TokenService, private location: Location, private connectionService: ConnectionService) {
     if (this.tokenService.isLoggedIn()) this.router.navigate(['/home']);
@@ -47,32 +49,77 @@ export class SignUpComponent {
       password: form.value.password,
       picture_id: '',
     };
-    if (!this.verifyInformations(user.first_name, user.last_name, user.username, user.email, user.password, form.value.password_confirmation)) {
-      return;
-    } else {
+    if (!this.verifyInformations(user.first_name, user.last_name, user.username, user.email, user.password, form.value.password_confirmation)) return;
+    else {
+      this.loading = true;
       this.connectionService.signup(user).subscribe((response: any) => {
         if (response !== 'success') response.then((value: any) => {
           this.error_message = value;
           if (this.error_message === 'username') {
+            this.loading = false;
             this.existing_username = true;
             this.existing_email = false;
             this.invalid_informations = false;
           } else if (this.error_message === 'email') {
+            this.loading = false;
             this.existing_username = false;
             this.existing_email = true;
             this.invalid_informations = false;
-          } else {
-            this.existing_username = false;
-            this.existing_email = false;
-            this.invalid_informations = true;
           }
         }); else {
-          this.existing_username = false;
-          this.existing_email = false;
-          this.invalid_informations = false;
+          this.successfulSignup();
         }
-      });
+      },
+        (error: any) => {
+          this.errorWhileSigningUp();
+        });
     }
+  }
+
+  successfulSignup() {
+    this.loading = false;
+    this.existing_username = false;
+    this.existing_email = false;
+    this.invalid_informations = false;
+    this.sucessfulSinupModal();
+  }
+
+  sucessfulSinupModal() {
+    Swal.fire({
+      title: 'Welcome to mud !',
+      text: 'Your account has been created successfully!',
+      icon: 'success',
+      confirmButtonText: 'Continue',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'button button--main button--big'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
+  errorWhileSigningUp() {
+    this.loading = false;
+    this.existing_username = false;
+    this.existing_email = false;
+    this.invalid_informations = true;
+    this.errorWhileSigningUpModal();
+  }
+
+  errorWhileSigningUpModal() {
+    Swal.fire({
+      title: 'Oops...',
+      text: 'Something went wrong while signing up',
+      icon: 'error',
+      confirmButtonText: 'Try again',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'button button--main button--big',
+      }
+    });
   }
 
   verifyInformations(first_name: string, last_name: string, username: string, email: string, password: string, password_confirmation: string) {

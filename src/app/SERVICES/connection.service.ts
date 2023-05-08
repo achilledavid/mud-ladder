@@ -23,11 +23,19 @@ export class ConnectionService {
                             this.router.navigate(['/home']);
                         });
                         return 'success';
-                    } else {
+                    }
+                    else if (response.status == 422) {
+                        throw new Error('Invalid username or password');
+                    }
+                    else if (response.status == 401) {
+                        throw new Error('Invalid username or password');
+                    }
+                    else {
                         throw new Error('Invalid response status');
                     }
                 }), catchError((error: any) => {
-                    throw new Error('Failed to log in');
+                    if (error.message == 'Invalid username or password') throw new Error('Invalid username or password');
+                    else throw new Error('Failed to log in');
                 })
             );
     }
@@ -42,7 +50,6 @@ export class ConnectionService {
         }).pipe(
             map((response: any) => {
                 if (response.status === 201) {
-                    this.router.navigate(['/login']);
                     return 'success';
                 } else {
                     return response.json().then((json: any) => {

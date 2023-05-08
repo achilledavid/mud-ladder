@@ -2,7 +2,7 @@
     <div class="login__image">
         <img src="assets/img/login_page_image.webp" alt="Smash bros tournament picture" draggable="false">
     </div>
-    <form #login_form="ngForm" class="form">
+    <form #login_form="ngForm" class="form" [class.form--loading]="loading">
         <div class="form__title">
             <h1>mud, smash bros ladder</h1>
         </div>

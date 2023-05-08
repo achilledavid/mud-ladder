@@ -51,6 +51,18 @@
         }
     }
 
+    &--big {
+        padding: 8px 12px;
+
+        p {
+            font-size: 1rem;
+        }
+
+        i {
+            font-size: 1rem;
+        }
+    }
+
     &:disabled {
         cursor: not-allowed;
         opacity: 0.6;
@@ -60,4 +72,10 @@
             filter: none;
         }
     }
+}
+
+.swal2-actions {
+    margin: 0 !important;
+    margin-top: 15px !important;
+    gap: 15px !important;
 }
