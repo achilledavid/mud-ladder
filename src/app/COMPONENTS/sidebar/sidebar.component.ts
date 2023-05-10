@@ -19,9 +19,4 @@ export class SidebarComponent {
     if (this.sidebarService.getSidebarState()) this.sidebarService.closeSidebar();
     else this.sidebarService.openSidebar();
   }
-
-  logout() {
-    this.sidebarService.closeSidebar();
-    this.connectionService.logout();
-  }
 }
