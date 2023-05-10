@@ -55,24 +55,23 @@ export class SignUpComponent {
     else {
       this.resetErrors();
       this.loading = true;
-      this.successfulSignup();
-      // this.connectionService.signup(user).subscribe((response: any) => {
-      //   if (response !== 'success') response.then((value: any) => {
-      //     this.error_message = value;
-      //     if (this.error_message === 'username') {
-      //       this.loading = false;
-      //       this.existing_username = true;
-      //     } else if (this.error_message === 'email') {
-      //       this.loading = false;
-      //       this.existing_email = true;
-      //     }
-      //   }); else {
-      //     this.successfulSignup();
-      //   }
-      // },
-      //   (error: any) => {
-      //     this.errorWhileSigningUp();
-      //   });
+      this.connectionService.signup(user).subscribe((response: any) => {
+        if (response !== 'success') response.then((value: any) => {
+          this.error_message = value;
+          if (this.error_message === 'username') {
+            this.loading = false;
+            this.existing_username = true;
+          } else if (this.error_message === 'email') {
+            this.loading = false;
+            this.existing_email = true;
+          }
+        }); else {
+          this.successfulSignup();
+        }
+      },
+        (error: any) => {
+          this.errorWhileSigningUp();
+        });
     }
   }
 
