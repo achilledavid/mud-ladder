@@ -49,6 +49,16 @@
             width: 100%;
         }
 
+        &:has(input:required) {
+            p:not(.message) {
+                &::after {
+                    content: "*";
+                    color: var(--red);
+                    margin-left: 3px;
+                }
+            }
+        }
+
         &--invalid {
             input {
                 border-color: var(--red);
@@ -68,6 +78,43 @@
 
             i {
                 color: var(--red);
+            }
+        }
+
+        &--valid {
+            input {
+                border-color: var(--green);
+                color: var(--green);
+
+                &:focus {
+                    box-shadow: 0px 0px 0px 3px var(--green-light);
+
+                    &:read-only {
+                        border-color: var(--green);
+                        box-shadow: 0px 0px 0px 0px transparent;
+                    }
+
+                }
+            }
+
+            &:has(input:required) {
+                p:not(.message) {
+                    &::after {
+                        color: var(--green);
+                    }
+                }
+            }
+
+            p {
+                color: var(--green);
+
+                &.message {
+                    display: block;
+                }
+            }
+
+            i {
+                color: var(--green);
             }
         }
 
@@ -98,16 +145,6 @@
                     &:hover {
                         filter: opacity(0.6);
                     }
-                }
-            }
-        }
-
-        &:has(input:required) {
-            p:not(.message) {
-                &::after {
-                    content: "*";
-                    color: var(--red);
-                    margin-left: 3px;
                 }
             }
         }

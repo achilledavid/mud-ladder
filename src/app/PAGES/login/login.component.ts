@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ConnectionService } from '../../SERVICES/connection.service';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -18,10 +18,55 @@ export class LoginComponent {
   public invalid_password: boolean = false;
   public password_visibility: boolean = false;
   public password_type: string = 'password';
+  public email_not_verified: boolean = false;
   public loading: boolean = false;
 
-  constructor(private connectionService: ConnectionService, private router: Router, private tokenService: TokenService, private location: Location) {
+  constructor(private connectionService: ConnectionService, private router: Router, private tokenService: TokenService, private location: Location, private route: ActivatedRoute) {
     if (this.tokenService.isLoggedIn()) this.router.navigate(['/home']);
+    this.checkIfVerfidyCodeInUrl();
+  }
+
+  checkIfVerfidyCodeInUrl() {
+    const verify_code = this.route.snapshot.paramMap.get('verify_code');
+    if (verify_code) {
+      this.verifyCode(verify_code);
+    }
+  }
+
+  verifyCode(code: string) {
+    this.connectionService.verifyCode(code).subscribe(
+      (response: any) => {
+        this.verifiedEmailModal();
+      },
+      (error: any) => {
+        this.errorWhileVerifyingEmailModal();
+      });
+  }
+
+  verifiedEmailModal() {
+    Swal.fire({
+      title: 'Success',
+      text: 'Your email has been verified !',
+      icon: 'success',
+      confirmButtonText: 'Ok',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'button button--main button--big',
+      }
+    });
+  }
+
+  errorWhileVerifyingEmailModal() {
+    Swal.fire({
+      title: 'Oops...',
+      text: 'Something went wrong while verifying your email !',
+      icon: 'error',
+      confirmButtonText: 'Try again',
+      buttonsStyling: false,
+      customClass: {
+        confirmButton: 'button button--main button--big',
+      }
+    });
   }
 
   isLoggedIn() {
@@ -34,38 +79,29 @@ export class LoginComponent {
   }
 
   login(form: NgForm) {
+    this.resetErrors();
     this.loading = true;
-    if (!this.verifyInformations(form.value.username, form.value.password)) return;
+    if (!this.verifyInformations(form.value.username, form.value.password)) {
+      this.loading = false;
+      return;
+    }
     this.connectionService.login(form.value.username, form.value.password).subscribe(
       (token: string) => {
         this.successfulLogin(form.value.username);
       },
       (error: any) => {
         this.loading = false;
-        error.message === 'Invalid username or password' ? this.invalid_informations = true : this.invalid_informations = false;
-        if (error.message != 'Invalid username or password') this.errorWhileLoggingModal();
+        if (error.message === 'Invalid username or password') this.invalid_informations = true;
+        else if (error.message === 'Email not verified') this.email_not_verified = true;
+        else this.errorWhileLoggingModal();
       }
     );
   }
 
   successfulLogin(name: string) {
     this.loading = false;
-    this.successfulLoginModal(name);
+    this.resetErrors();
     this.router.navigate(['/home']);
-    this.invalid_informations = false;
-  }
-
-  successfulLoginModal(name: string) {
-    Swal.fire({
-      title: 'Welcome back, ' + name + ' !',
-      text: 'You are now logged in !',
-      icon: 'success',
-      confirmButtonText: 'Continue',
-      buttonsStyling: false,
-      customClass: {
-        confirmButton: 'button button--main button--big'
-      }
-    });
   }
 
   errorWhileLoggingModal() {
@@ -106,5 +142,12 @@ export class LoginComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  resetErrors() {
+    this.invalid_informations = false;
+    this.invalid_username = false;
+    this.invalid_password = false;
+    this.email_not_verified = false;
   }
 }

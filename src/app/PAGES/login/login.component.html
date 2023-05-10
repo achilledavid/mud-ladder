@@ -6,14 +6,15 @@
         <div class="form__title">
             <h1>mud, smash bros ladder</h1>
         </div>
-        <div class="form__item" [class.form__item--invalid]="invalid_username || invalid_informations">
+        <div class="form__item"
+            [class.form__item--invalid]="invalid_username || invalid_informations || email_not_verified">
             <label for="username">
                 <p>username</p>
             </label>
             <input type="text" id="username" name="username" autocomplete="off" required ngModel>
             <p class="message" *ngIf="invalid_username">invalid username, must be 3-20 characters</p>
         </div>
-        <div class="form__item" [class.form__item--invalid]="invalid_informations">
+        <div class="form__item" [class.form__item--invalid]="invalid_informations || email_not_verified">
             <label for="password">
                 <p>password</p>
             </label>
@@ -24,6 +25,7 @@
                     title="show my password"></i>
             </div>
             <p class="message" *ngIf="invalid_informations">incorrect username or password</p>
+            <p class="message" *ngIf="email_not_verified">email not verified, check your mailbox</p>
         </div>
         <div class="form__buttons">
             <button class="button button--main" (click)="login(login_form)" [disabled]="login_form.invalid"

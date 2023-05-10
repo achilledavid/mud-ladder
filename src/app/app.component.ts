@@ -9,9 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'MUD';
 
-  constructor(public tokenService: TokenService) {
-    this.tokenService.redirectToLoginIfNotLoggedIn();
-  }
+  constructor(public tokenService: TokenService) { }
 
   isLoggedIn(): boolean {
     return this.tokenService.isLoggedIn();

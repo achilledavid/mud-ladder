@@ -22,9 +22,11 @@ export class SignUpComponent {
   public passwords_dont_match: boolean = false;
   public invalid_email: boolean = false;
   public existing_email: boolean = false;
+  public sent_email: boolean = false;
   public password_visibility: boolean = false;
   public password_type: string = 'password';
   public error_message: string = '';
+  public sent_form: boolean = false;
   public loading: boolean = false;
 
   constructor(private router: Router, private tokenService: TokenService, private location: Location, private connectionService: ConnectionService) {
@@ -49,56 +51,48 @@ export class SignUpComponent {
       password: form.value.password,
       picture_id: '',
     };
-    if (!this.verifyInformations(user.first_name, user.last_name, user.username, user.email, user.password, form.value.password_confirmation)) return;
+    if (!this.verifyInformations(user.first_name, user.last_name, user.username, user.email, user.password, form.value.password_confirmation) || this.sent_form) return;
     else {
+      this.resetErrors();
       this.loading = true;
-      this.connectionService.signup(user).subscribe((response: any) => {
-        if (response !== 'success') response.then((value: any) => {
-          this.error_message = value;
-          if (this.error_message === 'username') {
-            this.loading = false;
-            this.existing_username = true;
-            this.existing_email = false;
-            this.invalid_informations = false;
-          } else if (this.error_message === 'email') {
-            this.loading = false;
-            this.existing_username = false;
-            this.existing_email = true;
-            this.invalid_informations = false;
-          }
-        }); else {
-          this.successfulSignup();
-        }
-      },
-        (error: any) => {
-          this.errorWhileSigningUp();
-        });
+      this.successfulSignup();
+      // this.connectionService.signup(user).subscribe((response: any) => {
+      //   if (response !== 'success') response.then((value: any) => {
+      //     this.error_message = value;
+      //     if (this.error_message === 'username') {
+      //       this.loading = false;
+      //       this.existing_username = true;
+      //     } else if (this.error_message === 'email') {
+      //       this.loading = false;
+      //       this.existing_email = true;
+      //     }
+      //   }); else {
+      //     this.successfulSignup();
+      //   }
+      // },
+      //   (error: any) => {
+      //     this.errorWhileSigningUp();
+      //   });
     }
   }
 
   successfulSignup() {
+    this.resetErrors();
     this.loading = false;
-    this.existing_username = false;
-    this.existing_email = false;
-    this.invalid_informations = false;
-    this.sucessfulSinupModal();
+    this.sent_email = true;
+    this.sent_form = true;
   }
 
-  sucessfulSinupModal() {
-    Swal.fire({
-      title: 'Welcome to mud !',
-      text: 'Your account has been created successfully!',
-      icon: 'success',
-      confirmButtonText: 'Continue',
-      buttonsStyling: false,
-      customClass: {
-        confirmButton: 'button button--main button--big'
-      }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.router.navigate(['/login']);
-      }
-    });
+  resetErrors() {
+    this.invalid_informations = false;
+    this.invalid_first_name = false;
+    this.invalid_last_name = false;
+    this.invalid_username = false;
+    this.existing_username = false;
+    this.weak_password = false;
+    this.passwords_dont_match = false;
+    this.invalid_email = false;
+    this.existing_email = false;
   }
 
   errorWhileSigningUp() {

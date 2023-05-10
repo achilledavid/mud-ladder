@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 
 export interface sidebar_item {
     title: string;
@@ -28,7 +28,9 @@ export class SidebarService {
 
     constructor(private router: Router) {
         this.router.events.subscribe((event) => {
-            if (this.opened) this.closeSidebar();
+            if (event instanceof NavigationStart) {
+                if (this.opened) this.closeSidebar();
+            }
         });
     }
 

@@ -11,14 +11,16 @@
                 <label for="first_name">
                     <p>first name</p>
                 </label>
-                <input type="text" id="first_name" name="first_name" autocomplete="off" required ngModel>
+                <input type="text" id="first_name" name="first_name" autocomplete="off" required ngModel
+                    [readonly]="sent_form">
                 <p class="message" *ngIf="invalid_first_name">invalid first name, must be 3-20 characters</p>
             </div>
             <div class="form__item" [class.form__item--invalid]="invalid_last_name || invalid_informations">
                 <label for="last_name">
                     <p>last name</p>
                 </label>
-                <input type="text" id="last_name" name="last_name" autocomplete="off" required ngModel>
+                <input type="text" id="last_name" name="last_name" autocomplete="off" required ngModel
+                    [readonly]="sent_form">
                 <p class="message" *ngIf="invalid_last_name">invalid last name, must be 3-20 characters</p>
             </div>
         </div>
@@ -27,7 +29,7 @@
             <label for="username">
                 <p>username</p>
             </label>
-            <input type="text" id="username" name="username" autocomplete="off" required ngModel>
+            <input type="text" id="username" name="username" autocomplete="off" required ngModel [readonly]="sent_form">
             <p class="message" *ngIf="invalid_username">invalid username, must be 3-20 characters</p>
             <p class="message" *ngIf="existing_username && !invalid_username">username already taken</p>
         </div>
@@ -38,7 +40,8 @@
                     <p>password</p>
                 </label>
                 <div class="form__item__input">
-                    <input [type]="password_type" id="password" name="password" autocomplete="off" required ngModel>
+                    <input [type]="password_type" id="password" name="password" autocomplete="off" required ngModel
+                        [readonly]="sent_form">
                     <i class="fa password__eye" [class.fa-eye]="!password_visibility"
                         [class.fa-eye-slash]="password_visibility" (click)="togglePasswordVisibility()"
                         title="show my password"></i>
@@ -51,26 +54,32 @@
                     <p>confirm password</p>
                 </label>
                 <input type="password" id="password_confirmation" name="password_confirmation" autocomplete="off"
-                    required ngModel>
+                    required ngModel [readonly]="sent_form">
                 <p class="message" *ngIf="passwords_dont_match">passwords do not match</p>
             </div>
         </div>
-        <div class="form__item" [class.form__item--invalid]="invalid_email || existing_email || invalid_informations">
+        <div class="form__item" [class.form__item--invalid]="invalid_email || existing_email || invalid_informations"
+            [class.form__item--valid]="sent_email">
             <label for="email">
                 <p>e-mail</p>
             </label>
-            <input type="email" id="email" name="email" autocomplete="off" required ngModel>
+            <input type="email" id="email" name="email" autocomplete="off" required ngModel [readonly]="sent_form">
             <p class="message" *ngIf="invalid_email">invalid e-mail address</p>
             <p class="message" *ngIf="existing_email">e-mail already used</p>
+            <p class="message message--valid" *ngIf="sent_email">an e-mail was sent to this address to verify your
+                identity</p>
         </div>
         <div class="form__buttons">
             <span class="button button--icon" (click)="goBack()" title="go back to login page">
                 <i class="fa fa-arrow-left"></i>
                 <p>back</p>
             </span>
-            <button class="button button--main" (click)="signup(signup_form)" [disabled]="signup_form.invalid"
-                title="create your account to mud">
+            <button *ngIf="!sent_email && !sent_form" class="button button--main" (click)="signup(signup_form)"
+                [disabled]="signup_form.invalid || sent_form" title="create your account to mud">
                 <p>create your account</p>
+            </button>
+            <button *ngIf="sent_email && sent_form" class="button button--blue">
+                <p>e-mail not received ? resend one</p>
             </button>
         </div>
     </form>
