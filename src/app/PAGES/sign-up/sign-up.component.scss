@@ -1,0 +1,58 @@
+.sign-up {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+
+    form {
+        width: 100%;
+        padding: 0 60px;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5);
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .sign-up {
+        &__image {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .sign-up {
+        form {
+            padding: 0 40px;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .sign-up {
+        form {
+            padding: 0 20px;
+
+            .form__lign {
+                flex-direction: column;
+            }
+
+            .form__buttons {
+                flex-direction: column;
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+.profile {
+    background-color: var(--background-color);
+    border-radius: 100vmax;
+    position: relative;
+
+    img,
+    object {
+        background-color: var(--background);
+        max-width: 24px;
+        max-height: 24px;
+        object-fit: cover;
+        border-radius: 100vmax;
+        aspect-ratio: 1;
+        transition: 200ms ease;
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(0.8);
+        }
+    }
+
+    &__modal {
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        top: calc(100% + 5px);
+        right: 0;
+        min-width: 100px;
+        height: fit-content;
+        padding: 6px;
+        border-radius: 4px;
+        background-color: var(--background);
+        box-shadow: var(--box-shadow);
+
+        .button {
+            width: 100%;
+
+            p {
+                white-space: nowrap;
+            }
+        }
+
+        &--opened {
+            display: flex;
+        }
+    }
+}

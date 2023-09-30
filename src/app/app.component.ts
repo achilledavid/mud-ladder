@@ -1,3 +1,4 @@
+import { TokenService } from './SERVICES/token.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MUD';
+
+  constructor(public tokenService: TokenService) { }
+
+  isLoggedIn(): boolean {
+    return this.tokenService.isLoggedIn();
+  }
 }

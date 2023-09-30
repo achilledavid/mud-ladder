@@ -1,0 +1,17 @@
+<div class="profile">
+    <img src="assets/img/user.png" alt="profile image" (click)="toggleProfileModal()" />
+    <div class="profile__modal" [class.profile__modal--opened]="opened">
+        <button class="button button--main button--icon">
+            <i class="fa fa-user"></i>
+            <p>my profile</p>
+        </button>
+        <button class="button button--icon">
+            <i class="fa fa-cog"></i>
+            <p>settings</p>
+        </button>
+        <button class="button button--icon" (click)="logout()">
+            <i class="fa fa-sign-out"></i>
+            <p>signout</p>
+        </button>
+    </div>
+</div>

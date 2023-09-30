@@ -1,0 +1,47 @@
+<div class="login" *ngIf="!isLoggedIn()">
+    <div class="login__image">
+        <img src="assets/img/login_page_image.webp" alt="Smash bros tournament picture" draggable="false">
+    </div>
+    <form #login_form="ngForm" class="form" [class.form--loading]="loading">
+        <div class="form__title">
+            <h1>mud, smash bros ladder</h1>
+        </div>
+        <div class="form__item"
+            [class.form__item--invalid]="invalid_username || invalid_informations || email_not_verified">
+            <label for="username">
+                <p>username</p>
+            </label>
+            <input type="text" id="username" name="username" autocomplete="off" required ngModel>
+            <p class="message" *ngIf="invalid_username">invalid username, must be 3-20 characters</p>
+        </div>
+        <div class="form__item" [class.form__item--invalid]="invalid_informations || email_not_verified">
+            <label for="password">
+                <p>password</p>
+            </label>
+            <div class="form__item__input">
+                <input [type]="password_type" id="password" name="password" autocomplete="off" required ngModel>
+                <i class="fa password__eye" [class.fa-eye]="!password_visibility"
+                    [class.fa-eye-slash]="password_visibility" (click)="togglePasswordVisibility()"
+                    title="show my password"></i>
+            </div>
+            <p class="message" *ngIf="invalid_informations">incorrect username or password</p>
+            <p class="message" *ngIf="email_not_verified">email not verified, check your mailbox</p>
+        </div>
+        <div class="form__buttons">
+            <button class="button button--main" (click)="login(login_form)" [disabled]="login_form.invalid"
+                title="sign in to mud">
+                <p>sign in</p>
+            </button>
+        </div>
+        <div class="form__buttons">
+            <span class="button button--icon" (click)="goBack()" title="go back to previous page">
+                <i class="fa fa-arrow-left"></i>
+                <p>back</p>
+            </span>
+            <span class="button button--icon" (click)="signup()" title="no account ? sign up to mud">
+                <i class="fa fa-user-plus"></i>
+                <p>sign up</p>
+            </span>
+        </div>
+    </form>
+</div>

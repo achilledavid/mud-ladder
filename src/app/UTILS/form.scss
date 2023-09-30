@@ -1,0 +1,190 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+
+    &__lign {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+
+        .form__item {
+            width: 100%;
+        }
+    }
+
+    &__title {
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        label {
+            width: fit-content;
+            cursor: pointer;
+        }
+
+        p {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+
+            &.message {
+                display: none;
+                margin: 0;
+                font-weight: 400;
+                font-size: 0.65rem;
+            }
+        }
+
+        input {
+            width: 100%;
+        }
+
+        &:has(input:required) {
+            p:not(.message) {
+                &::after {
+                    content: "*";
+                    color: var(--red);
+                    margin-left: 3px;
+                }
+            }
+        }
+
+        &--invalid {
+            input {
+                border-color: var(--red);
+
+                &:focus {
+                    box-shadow: 0px 0px 0px 3px var(--red-light);
+                }
+            }
+
+            p {
+                color: var(--red);
+
+                &.message {
+                    display: block;
+                }
+            }
+
+            i {
+                color: var(--red);
+            }
+        }
+
+        &--valid {
+            input {
+                border-color: var(--green);
+                color: var(--green);
+
+                &:focus {
+                    box-shadow: 0px 0px 0px 3px var(--green-light);
+
+                    &:read-only {
+                        border-color: var(--green);
+                        box-shadow: 0px 0px 0px 0px transparent;
+                    }
+
+                }
+            }
+
+            &:has(input:required) {
+                p:not(.message) {
+                    &::after {
+                        color: var(--green);
+                    }
+                }
+            }
+
+            p {
+                color: var(--green);
+
+                &.message {
+                    display: block;
+                }
+            }
+
+            i {
+                color: var(--green);
+            }
+        }
+
+        &__input {
+            width: 100%;
+
+            &:has(input[type="password"], input[type="text"]) {
+                position: relative;
+
+                input {
+                    padding-right: 32px;
+                }
+
+                .password__eye {
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    font-size: 0.75rem;
+                    width: 30px;
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: 150ms ease;
+
+                    &:hover {
+                        filter: opacity(0.6);
+                    }
+                }
+            }
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+
+        .button {
+            width: 100%;
+            padding: 8px;
+        }
+    }
+
+    &--loading {
+        &::after {
+            content: "";
+            position: absolute;
+            top: calc(100% + 25px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 100vmax;
+            border: 2px solid var(--text);
+            border-top-color: transparent;
+            animation: loading 1s ease-in-out infinite;
+        }
+    }
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%) rotate(360deg);
+    }
+}
